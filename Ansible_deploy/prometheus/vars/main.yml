@@ -1,0 +1,11 @@
+---
+prometheus_image: prom/prometheus
+prometheus_container: prometheus
+prometheus_base: /prometheus-base
+prometheus_volume_dest: /etc/prometheus
+prometheus_volume_mountinstruction: "{{ prometheus_base }}:{{ prometheus_volume_dest }}"
+prometheus_rules: rules.yml
+prometheus_rule_file_location: "{{ prometheus_volume_dest }}/{{ prometheus_rules }}"
+prometheus_args:
+  config.file: "{{ prometheus_volume_dest }}/prometheus.yml"
+  storage.tsdb.path: "{{ prometheus_volume_dest }}/data"

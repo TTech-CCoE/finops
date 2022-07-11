@@ -1,0 +1,25 @@
+---
+- name: create grafana storage volume
+  file:
+    path: "{{ grafana_data }}" 
+    state: directory
+    owner: 472
+
+- name: Touch a file, using symbolic modes to set the permissions (equivalent to 0644)
+  file:
+    path: "{{ grafana_data }}/grafana.ini"
+    state: touch
+    owner: 472
+
+- name: start grafana
+  docker_container:
+    name: "{{ grafana_container }}"
+    hostname: "{{ grafana_container }}"
+    image: "{{ grafana_image }}" 
+    
+    published_ports:
+      - 3000:3000 
+    
+    volumes: "{{ grafana_mountinstructions }}"
+    env: "{{ grafana_environment_variables }}" 
+    restart_policy: always

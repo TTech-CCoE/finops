@@ -1,0 +1,13 @@
+---
+- name: restart grafana
+  become: yes
+  docker_container:
+    name: "{{ grafana_container }}"
+    hostname: "{{ grafana_container }}"
+    image: "{{ grafana_image }}" 
+    restart: yes
+    published_ports:
+      - 3000:3000
+    volumes: "{{ grafana_mountinstructions }}"
+    env: "{{ grafana_environment_variables }}" 
+    restart_policy: always

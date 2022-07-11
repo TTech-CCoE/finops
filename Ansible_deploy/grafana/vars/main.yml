@@ -1,0 +1,18 @@
+---
+prometheus_hostname: localhost
+grafana_container: grafana
+grafana_image: grafana/grafana
+grafana_data: /opt/grafana
+grafana_data_dest: /var/lib/grafana
+grafana_ini_dest: /etc/grafana/grafana.ini
+grafana_ini: "{{ grafana_data }}/grafana.ini"
+grafana_mount_data: "{{ grafana_data }}:{{ grafana_data_dest }}"
+grafana_mount_ini: "{{ grafana_ini }}:{{ grafana_ini_dest }}"
+grafana_mountinstructions:
+  - "{{ grafana_mount_data }}"
+  - "{{ grafana_mount_ini }}"
+grafana_admin_user: admin
+grafana_admin_password: admin
+grafana_environment_variables:
+  GF_SECURITY_ADMIN_USER: "{{ grafana_admin_user }}"
+  GF_SECURITY_ADMIN_PASSWORD: "{{ grafana_admin_password }}"

@@ -1,0 +1,11 @@
+---
+- name: restart prometheus
+  docker_container:
+      name: "{{ prometheus_container }}"
+      image: "{{ prometheus_image }}"
+      command: "{% for key in prometheus_args %}--{{key}}={{prometheus_args[key]}} {% endfor %}"
+      restart: yes 
+      published_ports:
+        - 9090:9090
+      volumes:
+        - "{{ prometheus_volume_mountinstruction }}"      
