@@ -6,3 +6,4 @@
     - docker
     - grafana
     - prometheus
+    - ansible-node-exporter
